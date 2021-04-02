@@ -1,6 +1,8 @@
 <?php
 namespace api\controllers;
+
 use Yii;
+
 /**
  * Site controller
  */
@@ -14,6 +16,8 @@ class SiteController extends BaseController
      */
     public function actionIndex()
     {
+        $redis = static::redis();
+
         return $this->render('index');
     }
 
@@ -24,9 +28,6 @@ class SiteController extends BaseController
      */
     public function actionLogin()
     {
-
-
-        
     }
 
     /**
@@ -36,7 +37,6 @@ class SiteController extends BaseController
      */
     public function actionLogout()
     {
-
     }
 
     /**
@@ -46,8 +46,6 @@ class SiteController extends BaseController
      */
     public function actionContact()
     {
-
-
     }
 
     /**
@@ -57,7 +55,6 @@ class SiteController extends BaseController
      */
     public function actionAbout()
     {
-
     }
 
     /**
@@ -67,9 +64,6 @@ class SiteController extends BaseController
      */
     public function actionSignup()
     {
-
-
-
     }
 
 
@@ -82,9 +76,6 @@ class SiteController extends BaseController
      */
     public function actionResetPassword($token)
     {
-
-
-
     }
 
     /**
@@ -96,7 +87,6 @@ class SiteController extends BaseController
      */
     public function actionVerifyEmail($token)
     {
-
     }
 
     /**
@@ -106,7 +96,5 @@ class SiteController extends BaseController
      */
     public function actionResendVerificationEmail()
     {
-
-
     }
 }

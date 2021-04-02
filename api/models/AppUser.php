@@ -4,25 +4,23 @@ namespace api\models;
 
 use Yii;
 
-/**
- * This is the model class for table "app_user".
- *
- * @property int $id
- * @property string $name
- * @property string $phone
- * @property string $city
- * @property string $password
- * @property string $auth_key
- * @property string $intro
- */
 class AppUser extends \yii\db\ActiveRecord
 {
+    private $uid;
+    private $suffix;
+    const TABLE_LONG = 10000;
+    public function __construct($uid)
+    {
+        $this->uid = $uid;
+        $this->suffix = ceil($uid/self::TABLE_LONG);
+        parent::__construct();
+    }
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'app_user';
+        return 'app_user_' . $this->suffix;
     }
 
     /**
@@ -39,13 +37,16 @@ class AppUser extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            // [['name', 'phone', 'city', 'password', 'auth_key', 'intro'], 'required'],
-            // [['name'], 'string', 'max' => 25],
-            // [['phone'], 'string', 'max' => 11],
-            // [['city'], 'string', 'max' => 100],
-            // [['password'], 'string', 'max' => 32],
-            // [['auth_key'], 'string', 'max' => 64],
-            // [['intro'], 'string', 'max' => 255],
+            [['id', 'name', 'phone', 'city', 'password', 'auth_key', 'company', 'email', 'uuid', 'date'], 'required'],
+            [['id'], 'integer'],
+            [['name'], 'string', 'max' => 25],
+            [['phone'], 'string', 'max' => 11],
+            [['city', 'email', 'uuid'], 'string', 'max' => 100],
+            [['password'], 'string', 'max' => 64],
+            [['auth_key'], 'string', 'max' => 32],
+            [['company'], 'string', 'max' => 255],
+            [['date'], 'string', 'max' => 10],
+            [['id'], 'unique'],
         ];
     }
 

@@ -1,8 +1,10 @@
 <?php
 
 namespace api\controllers;
+
 use Yii;
 use api\models\AppUser;
+
 class ExcelController extends BaseController
 {
     public function actionIndex()
@@ -48,5 +50,4 @@ class ExcelController extends BaseController
         // var_dump($data);die;
         // return self::Json(200,'获取成功！',Yii::$app->app_db);
     }
-
 }

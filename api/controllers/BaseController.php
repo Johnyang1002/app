@@ -14,7 +14,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
-
+use Predis\Client;
 
 class BaseController extends Controller
 {
@@ -48,7 +48,15 @@ class BaseController extends Controller
             ],
         ];
     }
-
+    public static function redis()
+    {
+        return  new Client([
+            'host' => \Yaconf::get('app.redis_host'),
+            'port' => \Yaconf::get('app.redis_port'),
+            'password' => \Yaconf::get('app.redis_password'),
+            'database' => \Yaconf::get('app.redis_database'),
+        ]);
+    }
     /**
      * {@inheritdoc}
      */
@@ -64,7 +72,7 @@ class BaseController extends Controller
             ],
         ];
     }
-    public static function Json($code,$msg,$data)
+    public static function Json($code, $msg, $data)
     {
         return \yii\helpers\Json::encode([
                 'code' => $code,
@@ -72,5 +80,4 @@ class BaseController extends Controller
                 'data' => $data,
         ]);
     }
-
 }
